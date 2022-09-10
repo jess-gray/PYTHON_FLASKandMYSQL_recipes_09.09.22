@@ -18,6 +18,45 @@
         <h1 class="display-4"> Welcome {{active_user.first_name}} </h1> 
         <p>All posted recipes:</p>
         <!-- active_user comes from dashboard route. first_name comes from constructer -->
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Under 30</th>
+                    <th scope="col">Posted By</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for one_recipe in all_the_recipes %} 
+                <tr>  
+                    <td>{{one_recipe.recipe_name}}</td>
+                    <td>
+                        {% if one_recipe.under_thirty == 1 %}
+                        <p>yes</p>
+                        {% elif one_recipe.under_thirty == 0 %}
+                        <p>no</p>
+                        {% endif %}
+                    <!-- Above s to show yes or no for under thirty -->
+                    </td>
+                    <td>{{one_recipe.owner.first_name}}</td>
+                    <!-- .owner came from recipe class-->
+                    <td>
+                        <div>
+                            <a href="/recipes/{{one_recipe.id}}" class="btn btn-outline-primary">View</a>
+                            {% if session['user_id'] == one_recipe.owner.id %}
+                            <a href="/edit/{{one_recipe.id}}" class="btn btn-outline-primary">Edit</a>
+                            <form action="/delete/{{one_recipe.id}}" method="post">
+                                    <input type="submit" value = "Delete" class="btn btn-outline-primary">
+                            </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                        
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>

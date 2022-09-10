@@ -14,7 +14,7 @@ class User: #make sure to change this
         self.email = data['email']
         self.password = data['password']
         self.created_at = data['created_at']
-        self.udpated_at = data['updated_at']
+        self.updated_at = data['updated_at']
         self.recipies = [] #this is to associate the other table
 
     @classmethod #this is actually adding the new user

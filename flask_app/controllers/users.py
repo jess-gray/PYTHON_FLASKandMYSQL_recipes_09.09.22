@@ -51,7 +51,8 @@ def dashboard():
     data = {
         'id' : session['user_id']
     }
-    return render_template('dashboard.html', active_user = User.get_by_id(data))
+    return render_template('dashboard.html', active_user = User.get_by_id(data), all_the_recipes = Recipe.get_all_with_user())
+    #all the recipes is what is getting looped through on the dashboard HTML page to show recipe info 
 
 @app.route('/logout') #this is to logout
 def logout():
