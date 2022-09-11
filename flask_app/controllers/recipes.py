@@ -59,7 +59,7 @@ def edit(id):
 @app.route('/submit_edit/<int:id>', methods = ['POST']) #this is to actually edit the user
 def update(id):
     if not Recipe.validate_edit_recipe(request.form): #validations
-        return redirect('/recipes/new') 
+        return redirect(f'/edit/{id}') 
     data = {
         'id' : id,
         'recipe_name' : request.form['recipe_name'],
